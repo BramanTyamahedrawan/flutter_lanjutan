@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart ';
-import 'package:flutter_lanjutan/01-HTTP-POST/post_result.dart';
+import 'package:flutter_lanjutan/02-HTTP-GET/get_result_single.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,38 +24,36 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  HttpPostResult? httpPostResult;
-  // variabel untuk menampung data dari API POST yang sudah diubah ke dalam bentuk objek
+  HttpGetSingleResult? httpGetSingleResult;
+  // berfungsi untuk menampung data dari API GET yang sudah diubah ke dalam bentuk objek
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('HTTP POST'),
+        title: const Text('HTTP GET Single'),
         backgroundColor: const Color.fromARGB(255, 61, 31, 131),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Text((httpPostResult != null)
-                ? "${httpPostResult!.id} | ${httpPostResult!.name} | ${httpPostResult!.job} | ${httpPostResult!.createdAt}"
+            Text((httpGetSingleResult != null)
+                ? "ID: ${httpGetSingleResult!.id} | Email: ${httpGetSingleResult!.email} | Name: ${httpGetSingleResult!.name} | Avatar: ${httpGetSingleResult!.avatar}"
                 : "Tidak Ada Data"),
             // menampilkan data dari API POST yang sudah diubah ke dalam bentuk objek
             // jika data tidak sama dengan null, maka tampilkan data, jika null maka tampilkan "Tidak Ada Data"
             ElevatedButton(
               onPressed: () {
-                HttpPostResult.connectToAPI(
-                        "Braman", "Programmer") // memanggil method connectToAPI
-                    .then((value) {
-                  // ketika method connectToAPI selesai dijalankan, maka akan menjalankan method then
-                  httpPostResult = value;
-                  // httpPostResult akan diisi dengan data dari API POST yang sudah diubah ke dalam bentuk objek
-                  // value adalah data dari API POST yang sudah diubah ke dalam bentuk objek
+                HttpGetSingleResult.connectToAPI("5").then((value) {
+                  // menghubungkan ke API GET
+                  httpGetSingleResult = value;
+                  // mengisi variabel httpGetSingleResult dengan data dari API GET yang sudah diubah ke dalam bentuk objek
                   setState(() {});
+                  // memanggil fungsi setState untuk membangun ulang widget
                 });
               },
-              child: const Text('Kirim Data'),
+              child: const Text('Lihat Data'),
             ),
           ],
         ),
