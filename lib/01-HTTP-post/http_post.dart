@@ -24,7 +24,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  HttpPostResult? httpPostResult = null;
+  HttpPostResult? httpPostResult;
+  // variabel untuk menampung data dari API POST yang sudah diubah ke dalam bentuk objek
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +41,17 @@ class _HomePageState extends State<HomePage> {
             Text((httpPostResult != null)
                 ? "${httpPostResult!.id} | ${httpPostResult!.name} | ${httpPostResult!.job} | ${httpPostResult!.createdAt}"
                 : "Tidak Ada Data"),
+            // menampilkan data dari API POST yang sudah diubah ke dalam bentuk objek
+            // jika data tidak sama dengan null, maka tampilkan data, jika null maka tampilkan "Tidak Ada Data"
             ElevatedButton(
               onPressed: () {
-                HttpPostResult.connectToAPI("Braman", "Programmer")
+                HttpPostResult.connectToAPI(
+                        "Braman", "Programmer") // memanggil method connectToAPI
                     .then((value) {
+                  // ketika method connectToAPI selesai dijalankan, maka akan menjalankan method then
                   httpPostResult = value;
+                  // httpPostResult akan diisi dengan data dari API POST yang sudah diubah ke dalam bentuk objek
+                  // value adalah data dari API POST yang sudah diubah ke dalam bentuk objek
                   setState(() {});
                 });
               },
