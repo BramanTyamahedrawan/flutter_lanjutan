@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart ';
-import 'package:flutter_lanjutan/02-HTTP-GET/get_result_single.dart';
+import 'package:flutter_lanjutan/02-HTTP-GET/single-user/get_result_single.dart';
 
 void main() {
   runApp(const MyApp());
